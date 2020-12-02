@@ -124,7 +124,7 @@ module udma_filter_au
       endcase // operanda_datasize_i
     end
 
-    assign s_outpostshift = $signed(r_accumulator) >>> cfg_shift_i;
+    assign s_outpostshift = cfg_use_signed_i ? $signed(r_accumulator) >>> cfg_shift_i : ($signed(r_accumulator) >> cfg_shift_i);
     assign output_data_o  = s_outpostshift[31:0];
     assign output_valid_o = s_sum_acc ? r_accoutvalid : r_sample_out;
     assign output_datasize_o = operanda_datasize_i;
